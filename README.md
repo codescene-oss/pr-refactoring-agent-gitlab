@@ -1,5 +1,7 @@
 # GitLab CI Integration for Refactoring Agent
 
+> **Note**: This project is under active development and not yet ready for use.
+
 This repository contains a GitLab CI/CD template for running the refactoring agent on GitLab merge requests.
 
 ## Quick Start
