@@ -115,7 +115,7 @@
     - git config user.email "${GITLAB_USER_EMAIL:-gitlab-ci[bot]@noreply.gitlab.com}"
 
   script:
-    # Validate COMMAND variable is set
+    # Validate required variables are set
     - |
       if [ -z "$COMMAND" ]; then
         echo "Error: COMMAND variable not set"
@@ -127,6 +127,11 @@
         echo "  /run-pipeline COMMAND=\"skill:fix-code-health-degradations improve complexity\""
         echo "  /run-pipeline COMMAND=\"skill:uplift-code-health improve readability\""
         echo "  /run-pipeline COMMAND=\"skill:fix-code-health-degradations skill:uplift-code-health improve all\""
+        exit 1
+      fi
+
+      if [ -z "$MODEL" ]; then
+        echo "Error: MODEL variable not set"
         exit 1
       fi
 
@@ -152,15 +157,6 @@
     - |
       echo "Running refactoring agent..."
       refactoring-agent run "$FULL_COMMAND" \
-        --model "${MODEL:-anthropic/claude-sonnet-4-20250514}"
-
-    # Push changes if any exist
-    - |
-      if [ "$(git status --porcelain)" ]; then
-        echo "Changes detected, pushing to remote..."
-        git push origin HEAD:${CI_COMMIT_REF_NAME}
-        echo "Changes pushed successfully"
-      else
-        echo "No changes to push"
-      fi
+        --model "$MODEL" \
+        --push
 
