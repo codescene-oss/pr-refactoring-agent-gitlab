@@ -61,6 +61,7 @@
     # Configure git
     - git config user.name "${GITLAB_USER_NAME:-gitlab-ci[bot]}"
     - git config user.email "${GITLAB_USER_EMAIL:-gitlab-ci[bot]@noreply.gitlab.com}"
+    - git fetch origin "$CI_COMMIT_REF_NAME" "${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-master}"
     - git checkout "$CI_COMMIT_REF_NAME"
 
   script:
