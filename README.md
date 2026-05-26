@@ -83,7 +83,6 @@ The agent includes two pre-built refactoring skills:
 | `CS_ACCESS_TOKEN` | CodeScene API access token | Yes |
 | `GITLAB_TOKEN` | GitLab project access token | Yes |
 | `REFACTORING_AGENT_VERSION` | Version of the agent to use | No |
-| `GITHUB_RELEASES_TOKEN` | Token for downloading releases (if releases repo is private) | No |
 | `ANTHROPIC_API_KEY` | Anthropic API key | No |
 | `OPENAI_API_KEY` | OpenAI API key | No |
 | `GOOGLE_API_KEY` | Google API key | No |
