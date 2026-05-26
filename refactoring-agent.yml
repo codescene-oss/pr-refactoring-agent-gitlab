@@ -61,6 +61,7 @@
     # Configure git
     - git config user.name "${GITLAB_USER_NAME:-gitlab-ci[bot]}"
     - git config user.email "${GITLAB_USER_EMAIL:-gitlab-ci[bot]@noreply.gitlab.com}"
+    - git checkout "$CI_COMMIT_REF_NAME"
 
   script:
     # Validate required variables are set
