@@ -1,7 +1,5 @@
 # CodeScene MR Refactoring Agent for GitLab
 
-> **Note**: This project is under active development and not yet ready for use.
-
 A GitLab CI template that enables CodeScene's MR Refactoring Agent so reviewers can trigger Code Health-guided refactoring directly from merge requests.
 
 It keeps refactoring inside the normal review flow while giving teams a consistent way to improve maintainability and prevent regressions.
