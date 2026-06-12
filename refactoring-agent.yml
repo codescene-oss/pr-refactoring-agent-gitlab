@@ -94,13 +94,16 @@
         --arg gl_token "${GITLAB_TOKEN}" \
         --arg project_id "${CI_PROJECT_ID}" \
         --arg mr_iid "${CI_MERGE_REQUEST_IID:-}" \
+        --arg base_ref "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" \
         --arg api_url "${CI_API_V4_URL:-https://gitlab.com/api/v4}" \
         --arg anthropic_key "${ANTHROPIC_API_KEY:-}" \
         --arg openai_key "${OPENAI_API_KEY:-}" \
         --arg google_key "${GOOGLE_API_KEY:-}" \
         --arg opencode_auth "${OPENCODE_AUTH_JSON:-}" \
+        --argjson print_logs "$([ "${PRINT_LOGS:-false}" = "true" ] && echo true || echo false)" \
         '{
           codescene_access_token: $token,
+          print_logs: $print_logs,
           tracking: { environment: "gitlab-ci" },
           provider: ({}
             + (if $anthropic_key != "" then { anthropic_api_key: $anthropic_key } else {} end)
@@ -109,6 +112,7 @@
             + (if $opencode_auth != "" then { opencode_auth_json: $opencode_auth } else {} end))
         }
         + (if $mr_iid != "" then {
+            git: { base_ref: $base_ref },
             ci: {
               gitlab: {
                 token: $gl_token,
@@ -139,7 +143,5 @@
     # Run refactoring agent
     - |
       echo "Running refactoring agent..."
-      refactoring-agent run "$FULL_COMMAND" \
-        --model "$MODEL" \
-        --push
+      refactoring-agent run "$FULL_COMMAND" --model "$MODEL" --push
 
