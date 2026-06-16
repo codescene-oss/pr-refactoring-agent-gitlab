@@ -57,7 +57,7 @@ The template automatically:
 - Configures git
 - Runs the refactoring
 - Pushes changes to the MR branch
-- Posts a note with the result
+- Posts a live-updating status note on the MR with progress and results
 
 ## 💡 The quality of the agent depends on the model
 

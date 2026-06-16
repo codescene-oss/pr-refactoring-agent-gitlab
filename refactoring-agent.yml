@@ -113,6 +113,7 @@
         }
         + (if $mr_iid != "" then {
             git: { base_ref: $base_ref },
+            plugins: ["gitlab-mr-status-reporter"],
             ci: {
               gitlab: {
                 token: $gl_token,
@@ -124,24 +125,11 @@
           } else {} end)')
       export CS_AGENT_CONFIG
 
-    # Prepend gitlab-mr-comment if in MR context
-    - |
-      if [ -n "${CI_MERGE_REQUEST_IID}" ]; then
-        export MR_IID="${CI_MERGE_REQUEST_IID}"
-        FULL_COMMAND="skill:gitlab-mr-comment ${COMMAND}"
-        echo "MR context detected, prepending gitlab-mr-comment skill"
-      else
-        FULL_COMMAND="${COMMAND}"
-        echo "No MR context, running without gitlab-mr-comment skill"
-      fi
-
-      echo "Full command: ${FULL_COMMAND}"
-
     # Set authenticated remote URL so the agent can push
     - git remote set-url origin "https://oauth2:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
 
     # Run refactoring agent
     - |
       echo "Running refactoring agent..."
-      refactoring-agent run "$FULL_COMMAND" --model "$MODEL" --push
+      refactoring-agent run "$COMMAND" --model "$MODEL" --push
 
