@@ -100,6 +100,8 @@
         --arg openai_key "${OPENAI_API_KEY:-}" \
         --arg google_key "${GOOGLE_API_KEY:-}" \
         --arg opencode_auth "${OPENCODE_AUTH_JSON:-}" \
+        --arg onprem "${CODESCENE_ONPREM_URL:-}" \
+        --arg ca_bundle "${CA_BUNDLE:-}" \
         --argjson print_logs "$([ "${PRINT_LOGS:-false}" = "true" ] && echo true || echo false)" \
         '{
           codescene_access_token: $token,
@@ -111,6 +113,8 @@
             + (if $google_key != "" then { google_api_key: $google_key } else {} end)
             + (if $opencode_auth != "" then { opencode_auth_json: $opencode_auth } else {} end))
         }
+        + (if $onprem != "" then { codescene_onprem_url: $onprem } else {} end)
+        + (if $ca_bundle != "" then { ca_bundle: $ca_bundle } else {} end)
         + (if $mr_iid != "" then {
             git: { base_ref: $base_ref },
             plugins: ["gitlab-mr-status-reporter"],

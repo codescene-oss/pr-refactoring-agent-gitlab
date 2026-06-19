@@ -85,6 +85,8 @@ The agent includes two pre-built refactoring skills:
 | `OPENAI_API_KEY` | OpenAI API key | No |
 | `GOOGLE_API_KEY` | Google API key | No |
 | `OPENCODE_AUTH_JSON` | OpenCode auth JSON | No |
+| `CODESCENE_ONPREM_URL` | CodeScene on-premises URL | No |
+| `CA_BUNDLE` | Path to a custom CA certificate bundle (PEM format) for SSL/TLS verification | No |
 
 ## Example Configurations
 
