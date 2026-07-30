@@ -61,8 +61,8 @@
     # Configure git
     - git config user.name "${GITLAB_USER_NAME:-gitlab-ci[bot]}"
     - git config user.email "${GITLAB_USER_EMAIL:-gitlab-ci[bot]@noreply.gitlab.com}"
-    - git fetch origin "$CI_COMMIT_REF_NAME" "${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-master}"
-    - git checkout "$CI_COMMIT_REF_NAME"
+    - git fetch origin "${CS_MR_SOURCE_BRANCH:-$CI_COMMIT_REF_NAME}" "${CS_MR_TARGET_BRANCH:-${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-$CI_DEFAULT_BRANCH}}"
+    - git checkout "${CS_MR_SOURCE_BRANCH:-$CI_COMMIT_REF_NAME}"
 
   script:
     # Validate required variables are set
@@ -93,8 +93,8 @@
         --arg token "${CS_ACCESS_TOKEN}" \
         --arg gl_token "${GITLAB_TOKEN}" \
         --arg project_id "${CI_PROJECT_ID}" \
-        --arg mr_iid "${CI_MERGE_REQUEST_IID:-}" \
-        --arg base_ref "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" \
+        --arg mr_iid "${CS_MR_IID:-${CI_MERGE_REQUEST_IID:-}}" \
+        --arg base_ref "${CS_MR_TARGET_BRANCH:-$CI_MERGE_REQUEST_TARGET_BRANCH_NAME}" \
         --arg api_url "${CI_API_V4_URL:-https://gitlab.com/api/v4}" \
         --arg anthropic_key "${ANTHROPIC_API_KEY:-}" \
         --arg openai_key "${OPENAI_API_KEY:-}" \
