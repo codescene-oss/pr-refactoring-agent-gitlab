@@ -2,7 +2,7 @@
 # Copy this to your project's .gitlab-ci.yml
 
 include:
-  - remote: 'https://raw.githubusercontent.com/codescene-oss/pr-refactoring-agent/main/gitlab/refactoring-agent.yml'
+  - remote: 'https://raw.githubusercontent.com/codescene-oss/pr-refactoring-agent-gitlab/main/refactoring-agent.yml'
 
 # Optional: Set default model
 variables:

@@ -2,7 +2,7 @@
 # This approach lets users click buttons instead of typing commands
 
 include:
-  - remote: 'https://raw.githubusercontent.com/codescene-oss/pr-refactoring-agent/main/gitlab/refactoring-agent.yml'
+  - remote: 'https://raw.githubusercontent.com/codescene-oss/pr-refactoring-agent-gitlab/main/refactoring-agent.yml'
 
 variables:
   MODEL: "anthropic/claude-sonnet-4-20250514"
