@@ -1,7 +1,7 @@
 # GitLab CI Template for Refactoring Agent
 # Include in your .gitlab-ci.yml:
 #   include:
-#     - remote: 'https://raw.githubusercontent.com/codescene-oss/pr-refactoring-agent/main/gitlab/refactoring-agent.yml'
+#     - remote: 'https://raw.githubusercontent.com/codescene-oss/pr-refactoring-agent-gitlab/main/refactoring-agent.yml'
 #
 # Usage:
 #   Comment on MR: /run-pipeline COMMAND="skill:fix-code-health-degradations improve complexity"
@@ -107,6 +107,7 @@
           codescene_access_token: $token,
           print_logs: $print_logs,
           tracking: { environment: "gitlab-ci" },
+          plugins: ["refactoring-reporter-apply", "gitlab-mr-status-reporter"],
           provider: ({}
             + (if $anthropic_key != "" then { anthropic_api_key: $anthropic_key } else {} end)
             + (if $openai_key != "" then { openai_api_key: $openai_key } else {} end)
@@ -117,7 +118,6 @@
         + (if $ca_bundle != "" then { ca_bundle: $ca_bundle } else {} end)
         + (if $mr_iid != "" then {
             git: { base_ref: $base_ref },
-            plugins: ["gitlab-mr-status-reporter"],
             ci: {
               gitlab: {
                 token: $gl_token,
@@ -136,4 +136,3 @@
     - |
       echo "Running refactoring agent..."
       refactoring-agent run "$COMMAND" --model "$MODEL" --push
-
