@@ -56,9 +56,10 @@ Then click the play button on the job in any merge request pipeline to trigger t
 The template automatically:
 - Downloads the refactoring agent binary
 - Configures git
+- Loads the apply and GitLab status reporters
 - Runs the refactoring
 - Pushes changes to the MR branch
-- Posts a live-updating status note when merge request context is available
+- Posts a live-updating status note on the MR with progress and results
 
 ## 💡 The quality of the agent depends on the model
 

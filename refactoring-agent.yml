@@ -107,8 +107,7 @@
           codescene_access_token: $token,
           print_logs: $print_logs,
           tracking: { environment: "gitlab-ci" },
-          plugins: (["refactoring-reporter-apply"]
-            + (if $mr_iid != "" then ["gitlab-mr-status-reporter"] else [] end)),
+          plugins: ["refactoring-reporter-apply", "gitlab-mr-status-reporter"],
           provider: ({}
             + (if $anthropic_key != "" then { anthropic_api_key: $anthropic_key } else {} end)
             + (if $openai_key != "" then { openai_api_key: $openai_key } else {} end)
