@@ -33,7 +33,7 @@
 
     # Download binary from GitHub Releases
     - |
-      VERSION="${REFACTORING_AGENT_VERSION:-v1.1.3}"
+      VERSION="${REFACTORING_AGENT_VERSION:-v1.1.5}"
       REPO="codescene-oss/refactoring-agent-releases"
       ASSET_NAME="${BINARY_NAME}.zip"
 
